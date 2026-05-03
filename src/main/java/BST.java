@@ -1,3 +1,4 @@
+import java.util.*;
 public class BST<K extends Comparable<K>, V> {
 
     private class Node {
@@ -41,5 +42,35 @@ public class BST<K extends Comparable<K>, V> {
         }
 
         return null;
+    }
+
+    public int size() {
+        return size(root);
+    }
+
+    private int size(Node x) {
+        if (x == null) return 0;
+        return 1 + size(x.left) + size(x.right);
+    }
+
+    public Iterable<Node> iterator() {
+        List<Node> list = new ArrayList<>();
+        inorder(root, list);
+        return list;
+    }
+
+    private void inorder(Node x, List<Node> list) {
+        if (x == null) return;
+        inorder(x.left, list);
+        list.add(x);
+        inorder(x.right, list);
+    }
+
+    public K getKey(Node node) {
+        return node.key;
+    }
+
+    public V getValue(Node node) {
+        return node.val;
     }
 }
