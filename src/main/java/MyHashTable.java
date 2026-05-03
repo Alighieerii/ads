@@ -73,4 +73,41 @@ public class MyHashTable<K, V> {
         }
         return null;
     }
+    public boolean contains(V value) {
+        for (HashNode<K, V> head : chainArray) {
+            while (head != null) {
+                if (head.value.equals(value)) {
+                    return true;
+                }
+                head = head.next;
+            }
+        }
+        return false;
+    }
+
+    public K getKey(V value) {
+        for (HashNode<K, V> head : chainArray) {
+            while (head != null) {
+                if (head.value.equals(value)) {
+                    return head.key;
+                }
+                head = head.next;
+            }
+        }
+        return null;
+    }
+
+    public void printBuckets() {
+        for (int i = 0; i < M; i++) {
+            int count = 0;
+            HashNode<K, V> head = chainArray[i];
+
+            while (head != null) {
+                count++;
+                head = head.next;
+            }
+
+            System.out.println("Bucket " + i + ": " + count);
+        }
+    }
 }
